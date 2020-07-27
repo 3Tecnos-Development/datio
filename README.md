@@ -1,2 +1,2 @@
-# dation
-Dation Desing System - A design system project for React UI library and Styled Component based 
+# datio
+Datio Desing System - A design system project for React UI library and Styled Component based 
