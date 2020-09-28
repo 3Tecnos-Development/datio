@@ -6,4 +6,4 @@
 
 <h1 align="center">Dation - Design System</h1>
 
-Datio Design System - A design system project for React UI library and Styled Component based 
+Datio Design System - A design system project for React UI library and Styled Component based
