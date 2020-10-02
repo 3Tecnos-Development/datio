@@ -1,20 +1,12 @@
 import styled, { css } from "styled-components";
-import Button, { ButtonType as ButtonTypeAnt } from "antd/lib/button";
+import Button from "antd/lib/button";
 import { NativeButtonProps } from "antd/lib/button/button";
 
 import { rgba } from "polished";
 import { currentColor } from "utils/functions";
 
-import { retract, up } from "./ButtonAnimate";
-import { gradient, inverse, outline, regular, single } from "./ButtonStyle";
-
-export const BaseStyleButtonType = ["gradient", "single", "outline", "inverse", "regular", "undefined"] as const;
-export declare type StyledButtonType = typeof BaseStyleButtonType[number];
-
-export declare type ButtonType = ButtonTypeAnt | StyledButtonType;
-
-declare const ButtonAnimate: ["up", "retract", "expand"];
-export declare type ButtonAnimate = typeof ButtonAnimate[number];
+import { ButtonAnimate, retract, up } from "./ButtonAnimate";
+import { ButtonType, gradient, inverse, outline, regular, single, StyledButtonType } from "./ButtonStyle";
 
 type OverrideButtonPropsType = Omit<NativeButtonProps, "type">;
 export declare interface StyledButtonProps extends OverrideButtonPropsType {

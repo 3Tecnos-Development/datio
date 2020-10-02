@@ -1,7 +1,15 @@
-import { rgba, setLightness } from "polished";
 import { css } from "styled-components";
+import { rgba, setLightness } from "polished";
+
+import { ButtonType as ButtonTypeAnt } from "antd/lib/button";
+
 import { currentColor } from "utils/functions";
 import { StyledButtonProps } from "./Button";
+
+export const BaseStyleButtonType = ["gradient", "single", "outline", "inverse", "regular", "undefined"] as const;
+export declare type StyledButtonType = typeof BaseStyleButtonType[number];
+
+export declare type ButtonType = ButtonTypeAnt | StyledButtonType;
 
 const regular = css<StyledButtonProps>`
   background-color: ${(props) => currentColor(props?.color, props)} !important;
@@ -66,5 +74,13 @@ const inverse = css<StyledButtonProps>`
         : props.theme.colors?.white || "#fff"} !important;
   }
 `;
+
+export function isStyledButtonType(object: any): boolean {
+  try {
+    return BaseStyleButtonType.includes(object);
+  } catch (e) {
+    return false;
+  }
+}
 
 export { single, inverse, regular, gradient, outline };
