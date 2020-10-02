@@ -1,6 +1,6 @@
 import React from "react";
 import { Story, Meta } from "@storybook/react";
-
+import "antd/dist/antd.css";
 //import { storiesOf } from "@storybook/react";
 
 import { Button, ButtonProps } from "components/Button";
@@ -33,9 +33,9 @@ SingleRetract.args = {
   color: "green.700",
 };
 
-export const Outline = Template.bind({});
-Outline.args = {
-  type: "outline",
+export const dashed = Template.bind({});
+dashed.args = {
+  type: "dashed",
 };
 
 /*
