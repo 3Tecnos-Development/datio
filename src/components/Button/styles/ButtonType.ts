@@ -12,8 +12,8 @@ export declare type StyledButtonType = typeof BaseStyleButtonType[number];
 export declare type ButtonType = ButtonTypeAnt | StyledButtonType;
 
 const regular = css<StyledButtonProps>`
-  background-color: ${(props) => currentColor(props?.color, props)} !important;
-  border-color: ${(props) => currentColor(props?.color, props)} !important;
+  background-color: ${(props) => currentColor(props?.color, props)};
+  border: 1px !important;
 
   &:hover {
     background-color: ${(props) => rgba(currentColor(props?.color, props), 0.8)} !important;
@@ -21,24 +21,20 @@ const regular = css<StyledButtonProps>`
 `;
 
 const gradient = css<StyledButtonProps>`
-  background: -webkit-gradient(
-    linear,
-    left top,
-    right top,
-    from(${(props) => setLightness(0.8, currentColor(props?.color, props))}),
-    to(${(props) => currentColor(props?.color, props)})
-  ) !important;
   background: linear-gradient(
     to right,
     ${(props) => setLightness(0.8, currentColor(props?.color, props))},
     ${(props) => currentColor(props?.color, props)}
   ) !important;
 
-  -webkit-transition: opacity 0.3s ease !important;
-  transition: opacity 0.3s ease !important;
+  border: 1px !important;
 
   &:hover {
-    opacity: 0.8 !important;
+    background: linear-gradient(
+      to left,
+      ${(props) => setLightness(0.8, currentColor(props?.color, props))},
+      ${(props) => currentColor(props?.color, props)}
+    ) !important;
   }
 `;
 
@@ -55,7 +51,8 @@ const outline = css<StyledButtonProps>`
   border: 1px solid ${(props) => currentColor(props?.color, props)} !important;
 
   &:hover {
-    color: #000 !important;
+    color: ${(props) => props.theme.colors?.white} !important;
+    background-color: ${(props) => currentColor(props?.color, props)} !important;
     opacity: 1 !important;
   }
 `;
@@ -63,11 +60,10 @@ const outline = css<StyledButtonProps>`
 const inverse = css<StyledButtonProps>`
   color: ${(props) => currentColor(props?.color, props)} !important;
   background-color: ${(props) => rgba(currentColor(props?.color, props), 0.2)} !important;
-  border-color: ${(props) => rgba(currentColor(props?.color, props), 0.2)} !important;
+  border: 1px !important;
 
   &:hover {
     background-color: ${(props) => currentColor(props?.color, props)} !important;
-    border-color: ${(props) => currentColor(props?.color, props)} !important;
     color: ${(props) =>
       currentColor(props?.color, props) === props.theme.colors?.white
         ? props.theme.colors?.black || "#000"

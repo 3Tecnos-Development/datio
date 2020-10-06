@@ -5,8 +5,17 @@ import { NativeButtonProps } from "antd/lib/button/button";
 import { rgba } from "polished";
 import { currentColor } from "utils/functions";
 
-import { ButtonAnimate, retract, up } from "./ButtonAnimate";
-import { ButtonType, gradient, inverse, outline, regular, single, StyledButtonType } from "./ButtonStyle";
+import { ButtonAnimate, expand, retract, up } from "./ButtonAnimate";
+import {
+  ButtonType,
+  gradient,
+  inverse,
+  isStyledButtonType,
+  outline,
+  regular,
+  single,
+  StyledButtonType,
+} from "./ButtonType";
 
 type OverrideButtonPropsType = Omit<NativeButtonProps, "type">;
 export declare interface StyledButtonProps extends OverrideButtonPropsType {
@@ -16,17 +25,21 @@ export declare interface StyledButtonProps extends OverrideButtonPropsType {
    * Animate your button with a simple property
    */
   animate?: ButtonAnimate;
+  /**
+   * `Color` follow the partner from Smart Swatch
+   */
   color?: string;
   rounded?: boolean;
 }
 
-export declare interface BaseButtonProps extends StyledButtonProps {
+type OverrideStyledButtonProps = Omit<StyledButtonProps, "customtype">;
+export declare interface BaseButtonProps extends OverrideStyledButtonProps {
   type?: ButtonType;
 }
 
 const shadow = css<StyledButtonProps>`
   &:hover {
-    box-shadow: 0 4px 20px -6px ${(props) => rgba(currentColor(props.color, props), 0.45)} !important;
+    box-shadow: 0 10px 20px -10px ${(props) => rgba(currentColor(props.color, props), 0.75)} !important;
   }
 `;
 
@@ -38,24 +51,18 @@ const StyledButton = styled(Button)<StyledButtonProps>`
 
   font-weight: 500;
   font-size: 12px;
-  padding: 0.375rem 0.75rem;
+  padding: 0.4375rem 1.25rem;
+  margin: 0.1rem;
 
   ${(props) => {
-    switch (props?.type) {
-      case "dashed":
-        return `
-		`;
-      default:
-        return `
-		border: 1px solid transparent;
-		border-radius: 0.25rem;
-	  
-		border-radius: 0.1875rem !important;
-	  
-		background-color: ${currentColor(props?.color, props)} !important;
-	  
-		color: ${props.theme.colors?.white} !important;
-		`;
+    if (props?.customtype && isStyledButtonType(props?.customtype)) {
+      return `return 
+	border-radius: 0.25rem !important;
+  
+	background-color: ${currentColor(props?.color, props)} !important;
+  
+	color: ${props.theme.colors?.white} !important;
+	`;
     }
   }}
 
@@ -70,7 +77,7 @@ const StyledButton = styled(Button)<StyledButtonProps>`
   ${(props) =>
     props?.rounded &&
     css`
-      border-radius: 50px;
+      border-radius: 1.875rem !important;
     `}
 
    [ant-click-animating-without-extra-node='true']::after {
@@ -79,6 +86,8 @@ const StyledButton = styled(Button)<StyledButtonProps>`
 
    ${(props) => props.animate && props.animate === "up" && up}
    ${(props) => props.animate && props.animate === "retract" && retract}
+   ${(props) => props.animate && props.animate === "expand" && expand}
+
    
 `;
 

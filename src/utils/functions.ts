@@ -1,5 +1,3 @@
-import { IColors } from "styled-components";
-
 export const currentColor = (color?: string, props?: any) => {
   let result: string;
 
