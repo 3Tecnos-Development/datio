@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components";
-import Button from "antd/lib/button";
-import { NativeButtonProps } from "antd/lib/button/button";
+import Button, { NativeButtonProps } from "antd/lib/button/button";
 
 import { rgba } from "polished";
-import { currentColor } from "utils/functions";
+import { Color } from "../../../utils/functions";
+import { space, width, fontSize, color, ColorProps } from "styled-system";
 
 import { ButtonAnimate, expand, retract, up } from "./ButtonAnimate";
 import {
@@ -18,7 +18,7 @@ import {
 } from "./ButtonType";
 
 type OverrideButtonPropsType = Omit<NativeButtonProps, "type">;
-export declare interface StyledButtonProps extends OverrideButtonPropsType {
+export interface StyledButtonProps extends OverrideButtonPropsType {
   customtype?: StyledButtonType;
   shadow?: boolean;
   /**
@@ -28,44 +28,48 @@ export declare interface StyledButtonProps extends OverrideButtonPropsType {
   /**
    * `Color` follow the partner from Smart Swatch
    */
-  color?: string;
+  /*color?: string;*/
   rounded?: boolean;
 }
 
-type OverrideStyledButtonProps = Omit<StyledButtonProps, "customtype">;
-export declare interface BaseButtonProps extends OverrideStyledButtonProps {
+type OverrideStyledButtonProps = Omit<StyledButtonProps, "customtype"> & ColorProps;
+export interface BaseButtonProps extends OverrideStyledButtonProps {
+  /**
+   * Choose the formatting to presentation of the button
+   */
   type?: ButtonType;
 }
 
 const shadow = css<StyledButtonProps>`
   &:hover {
-    box-shadow: 0 10px 20px -10px ${(props) => rgba(currentColor(props.color, props), 0.75)} !important;
+    box-shadow: 0 10px 20px -10px ${(props) => rgba(Color(props.color), 0.75)} !important;
   }
 `;
 
-const StyledButton = styled(Button)<StyledButtonProps>`
-	
+const StyledButton: any = styled(Button)<StyledButtonProps>`
+
   cursor: pointer;
   transition: all 0.3s ease-out;
-  -webkit-transition: all 0.3s ease-out;
 
   font-weight: 500;
   font-size: 12px;
   padding: 0.4375rem 1.25rem;
   margin: 0.1rem;
 
+  ${color};
+
   ${(props) => {
     if (props?.customtype && isStyledButtonType(props?.customtype)) {
-      return `return 
+      return ` 
 	border-radius: 0.25rem !important;
   
-	background-color: ${currentColor(props?.color, props)} !important;
+	background-color: ${Color(props?.color)} ;
   
-	color: ${props.theme.colors?.white} !important;
+	color: ${props.theme.colors?.white} ;
 	`;
     }
   }}
-
+  
   ${(props) => props?.customtype && props?.customtype === "gradient" && gradient}
   ${(props) => props?.customtype && props?.customtype === "single" && single}
   ${(props) => props?.customtype && props?.customtype === "outline" && outline}
@@ -73,7 +77,7 @@ const StyledButton = styled(Button)<StyledButtonProps>`
   ${(props) => props?.customtype && props?.customtype === "regular" && regular}  
 
   ${(props) => props?.shadow && shadow}
-    
+
   ${(props) =>
     props?.rounded &&
     css`
@@ -81,14 +85,12 @@ const StyledButton = styled(Button)<StyledButtonProps>`
     `}
 
    [ant-click-animating-without-extra-node='true']::after {
-    box-shadow: 0 0 0 0 ${(props) => currentColor(props.color, props)} !important;
+    box-shadow: 0 0 0 0 ${(props) => Color(props.color)} !important;
    }
 
    ${(props) => props.animate && props.animate === "up" && up}
    ${(props) => props.animate && props.animate === "retract" && retract}
    ${(props) => props.animate && props.animate === "expand" && expand}
-
-   
 `;
 
 export default StyledButton;

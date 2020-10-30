@@ -3,28 +3,28 @@ import { rgba, setLightness } from "polished";
 
 import { ButtonType as ButtonTypeAnt } from "antd/lib/button";
 
-import { currentColor } from "utils/functions";
+import { Color } from "../../../utils/functions";
 import { StyledButtonProps } from "./Button";
 
-export const BaseStyleButtonType = ["gradient", "single", "outline", "inverse", "regular", "undefined"] as const;
+export const BaseStyleButtonType = ["gradient", "single", "outline", "inverse", "regular"] as const;
 export declare type StyledButtonType = typeof BaseStyleButtonType[number];
 
 export declare type ButtonType = ButtonTypeAnt | StyledButtonType;
 
 const regular = css<StyledButtonProps>`
-  background-color: ${(props) => currentColor(props?.color, props)};
+  background-color: ${(props) => Color(props?.color)};
   border: 1px !important;
 
   &:hover {
-    background-color: ${(props) => rgba(currentColor(props?.color, props), 0.8)} !important;
+    background-color: ${(props) => rgba(Color(props?.color), 0.8)} !important;
   }
 `;
 
 const gradient = css<StyledButtonProps>`
   background: linear-gradient(
     to right,
-    ${(props) => setLightness(0.8, currentColor(props?.color, props))},
-    ${(props) => currentColor(props?.color, props)}
+    ${(props) => setLightness(0.8, Color(props?.color))},
+    ${(props) => Color(props?.color)}
   ) !important;
 
   border: 1px !important;
@@ -32,40 +32,44 @@ const gradient = css<StyledButtonProps>`
   &:hover {
     background: linear-gradient(
       to left,
-      ${(props) => setLightness(0.8, currentColor(props?.color, props))},
-      ${(props) => currentColor(props?.color, props)}
+      ${(props) => setLightness(0.8, Color(props?.color))},
+      ${(props) => Color(props?.color)}
     ) !important;
   }
 `;
 
 const single = css<StyledButtonProps>`
-  background-color: ${(props) => currentColor(props?.color, props)} !important;
-  border-color: ${(props) => currentColor(props?.color, props)} !important;
-  border: 1px solid ${(props) => currentColor(props?.color, props)} !important;
+  background-color: ${(props) => Color(props?.color)} !important;
+  border-color: ${(props) => Color(props?.color)} !important;
+  border: 1px solid ${(props) => Color(props?.color)} !important;
+
+  &:hover {
+    color: ${(props) => props.theme.colors?.white} !important;
+  }
 `;
 
 const outline = css<StyledButtonProps>`
   background-color: transparent !important;
 
-  color: ${(props) => currentColor(props?.color, props)} !important;
-  border: 1px solid ${(props) => currentColor(props?.color, props)} !important;
+  color: ${(props) => Color(props?.color)} !important;
+  border: 1px solid ${(props) => Color(props?.color)} !important;
 
   &:hover {
     color: ${(props) => props.theme.colors?.white} !important;
-    background-color: ${(props) => currentColor(props?.color, props)} !important;
+    background-color: ${(props) => Color(props?.color)} !important;
     opacity: 1 !important;
   }
 `;
 
 const inverse = css<StyledButtonProps>`
-  color: ${(props) => currentColor(props?.color, props)} !important;
-  background-color: ${(props) => rgba(currentColor(props?.color, props), 0.2)} !important;
+  color: ${(props) => Color(props?.color)} !important;
+  background-color: ${(props) => rgba(Color(props?.color), 0.2)} !important;
   border: 1px !important;
 
   &:hover {
-    background-color: ${(props) => currentColor(props?.color, props)} !important;
+    background-color: ${(props) => Color(props?.color)} !important;
     color: ${(props) =>
-      currentColor(props?.color, props) === props.theme.colors?.white
+      Color(props?.color) === props.theme.colors?.white
         ? props.theme.colors?.black || "#000"
         : props.theme.colors?.white || "#fff"} !important;
   }

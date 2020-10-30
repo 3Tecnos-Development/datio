@@ -1,10 +1,15 @@
-export const currentColor = (color?: string, props?: any) => {
+import { useContext } from "react";
+import { ThemeContext } from "styled-components";
+
+export const Color = (color?: string) => {
   let result: string;
 
-  result = props?.theme?.colors?.default;
+  const themeContext = useContext(ThemeContext);
 
-  if (color && props) {
-    let obj = props?.theme?.colors;
+  result = themeContext?.colors?.default;
+
+  if (color && themeContext) {
+    let obj = themeContext?.colors;
 
     Object.keys(obj).forEach((key) => {
       var properties = color.split(".");

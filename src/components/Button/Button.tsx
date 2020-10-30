@@ -5,7 +5,7 @@ import StyledButton, { BaseButtonProps } from "./styles/Button";
 import { isStyledButtonType, StyledButtonType } from "./styles/ButtonType";
 
 /**
- * The `Button` component with multiples possibility from use
+ * The `Button` component with multiples possibility to use
  */
 const Button: React.FC<BaseButtonProps> = ({ type, ...rest }) => {
   if (isStyledButtonType(type)) return <StyledButton customtype={type as StyledButtonType} {...rest} />;
@@ -14,6 +14,8 @@ const Button: React.FC<BaseButtonProps> = ({ type, ...rest }) => {
 
 Button.defaultProps = {
   type: "single",
+  rounded: false,
+  shadow: false,
 };
 
 export default Button;

@@ -3,7 +3,7 @@ import { Story, Meta } from "@storybook/react";
 import "antd/dist/antd.css";
 //import { storiesOf } from "@storybook/react";
 
-import { Button, ButtonProps } from "components/Button";
+import { Button, ButtonProps } from "../components/Button";
 
 export default {
   title: "Components/Button",
@@ -59,7 +59,12 @@ export const Animate = () => (
 
 export const Others = () => (
   <>
-    <Button shadow>Shadow</Button>
-    <Button rounded>Rounded</Button>
+    <Button shadow color="green.500" bg="green.500">
+      Shadow
+    </Button>
+    <Button bg="danger" rounded>
+      Rounded
+    </Button>
+    <Button animate="expand">Expand</Button>
   </>
 );

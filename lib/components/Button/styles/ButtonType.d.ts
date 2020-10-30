@@ -1,0 +1,12 @@
+import { ButtonType as ButtonTypeAnt } from "antd/lib/button";
+import { StyledButtonProps } from "./Button";
+export declare const BaseStyleButtonType: readonly ["gradient", "single", "outline", "inverse", "regular", undefined];
+export declare type StyledButtonType = typeof BaseStyleButtonType[number];
+export declare type ButtonType = ButtonTypeAnt | StyledButtonType;
+declare const regular: import("styled-components").FlattenInterpolation<import("styled-components").ThemedStyledProps<StyledButtonProps, any>>;
+declare const gradient: import("styled-components").FlattenInterpolation<import("styled-components").ThemedStyledProps<StyledButtonProps, any>>;
+declare const single: import("styled-components").FlattenInterpolation<import("styled-components").ThemedStyledProps<StyledButtonProps, any>>;
+declare const outline: import("styled-components").FlattenInterpolation<import("styled-components").ThemedStyledProps<StyledButtonProps, any>>;
+declare const inverse: import("styled-components").FlattenInterpolation<import("styled-components").ThemedStyledProps<StyledButtonProps, any>>;
+export declare function isStyledButtonType(object: any): boolean;
+export { single, inverse, regular, gradient, outline };

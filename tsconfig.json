@@ -3,7 +3,10 @@
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
+    "declaration": true, // Generates corresponding '.d.ts' file. ,*/
+    "outDir": "lib" /* Redirect output structure to the directory. */,
     "skipLibCheck": true,
+    "noImplicitAny": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
@@ -12,10 +15,10 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react",
-    "baseUrl": "src/"
+    //"noEmit": true,
+    "jsx": "react"
   },
   "include": ["src"],
+  "exclude": ["node_modules", "**/__tests__/*", "src/**/stories/*"],
   "files": ["src/styles/styled.d.ts" /*"src/setupTests.ts"*/]
 }
